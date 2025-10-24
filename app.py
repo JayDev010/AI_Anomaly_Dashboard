@@ -5,6 +5,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import time
+import streamlit as st
 from sklearn.ensemble import IsolationForest
 from sklearn.svm import OneClassSVM
 from sklearn.preprocessing import StandardScaler
@@ -20,7 +21,7 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="ZTA Anomaly Dashboard", layout="wide", initial_sidebar_state="expanded")
 
 @st.cache_data
-def load_data(path="/mnt/data/zt_features.csv"):
+def load_data(path="zt_features.csv"):
     df = pd.read_csv(path)
     if "is_anomaly" not in df.columns:
         raise RuntimeError("Dataset must include 'is_anomaly' column")
@@ -60,7 +61,7 @@ st.markdown("Models trained on normal data. Autoencoder threshold = **99th perce
 
 # Sidebar
 st.sidebar.header("Controls")
-data_path = st.sidebar.text_input("Path to features CSV", "/mnt/data/zt_features.csv")
+data_path = st.sidebar.text_input("Path to features CSV", "zt_features.csv")
 simulate = st.sidebar.checkbox("Enable real-time simulation", value=False)
 chunk_size = st.sidebar.number_input("Real-time batch size (rows)", min_value=1, max_value=1000, value=50)
 interval = st.sidebar.number_input("Simulation interval (seconds)", min_value=0.5, max_value=30.0, value=3.0, step=0.5)
