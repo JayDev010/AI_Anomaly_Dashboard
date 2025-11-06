@@ -34998,4 +34998,4 @@ timestamp,user,role,device_id,device_trust,country,lat,lon,resource,action,resul
 2025-10-16 17:33:05,user006,employee,device097,trusted,UK,51.5,-0.12,finance_app,logout,success,true,0
 2025-10-16 20:58:19,user022,contractor,device073,untrusted,UK,51.5,-0.12,hr_portal,login,success,false,0
 2025-10-16 21:07:59,user042,employee,device007,trusted,DE,52.52,13.4,hr_portal,access,success,true,0
-2025-10-17 02:29:35,user043,employee,device024,trusted,US,37.77,-122.41,dev_repo,access,success,true,0
+2025-10-17 02:29:35,user043,employee,device024,untrusted,ZIM,37.77,-122.41,dev_repo,access,success,true,0
