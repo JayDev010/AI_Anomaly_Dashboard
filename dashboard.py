@@ -11,8 +11,14 @@ import os
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.metrics import confusion_matrix, roc_curve, roc_auc_score
-import tensorflow as tf
-from tensorflow import keras
+
+# Optional tensorflow import (only needed for AutoEncoder)
+try:
+    import tensorflow as tf
+    from tensorflow import keras
+    TENSORFLOW_AVAILABLE = True
+except ImportError:
+    TENSORFLOW_AVAILABLE = False
 
 st.set_page_config(
     page_title="ML Anomaly Detection Dashboard",
@@ -53,8 +59,10 @@ def load_models():
             models['isolation_forest'] = joblib.load('models/isolation_forest_model.pkl')
         if os.path.exists('models/svm_model.pkl'):
             models['svm'] = joblib.load('models/svm_model.pkl')
-        if os.path.exists('models/autoencoder_model.h5'):
+        if os.path.exists('models/autoencoder_model.h5') and TENSORFLOW_AVAILABLE:
             models['autoencoder'] = keras.models.load_model('models/autoencoder_model.h5')
+        elif os.path.exists('models/autoencoder_model.h5') and not TENSORFLOW_AVAILABLE:
+            pass  # AutoEncoder model exists but TensorFlow not available - will show warning in UI
         if os.path.exists('models/feature_scaler.pkl'):
             models['scaler'] = joblib.load('models/feature_scaler.pkl')
         if os.path.exists('models/feature_columns.json'):
@@ -137,6 +145,11 @@ def plot_confusion_matrix_plotly(y_true, y_pred, model_name):
 
 # Main App
 st.title("🤖 ML Anomaly Detection Dashboard")
+
+# Show warning if TensorFlow is not available
+if not TENSORFLOW_AVAILABLE:
+    st.warning("⚠️ TensorFlow is not installed. AutoEncoder model features will be disabled. Install with: `pip install tensorflow`")
+
 st.markdown("---")
 
 # Sidebar
@@ -335,12 +348,17 @@ if page == "Predictions":
                         svm_pred = models['svm'].predict(X_scaled)
                         predictions['SVM'] = svm_pred
                     
-                    if 'autoencoder' in models:
-                        reconstructions = models['autoencoder'].predict(X_scaled, verbose=0)
-                        mse = np.mean(np.power(X_scaled - reconstructions, 2), axis=1)
-                        # Use a threshold (you might want to save this from training)
-                        threshold = np.percentile(mse, 95)  # Default threshold
-                        predictions['AutoEncoder'] = (mse > threshold).astype(int)
+                    if 'autoencoder' in models and TENSORFLOW_AVAILABLE:
+                        try:
+                            reconstructions = models['autoencoder'].predict(X_scaled, verbose=0)
+                            mse = np.mean(np.power(X_scaled - reconstructions, 2), axis=1)
+                            # Use a threshold (you might want to save this from training)
+                            threshold = np.percentile(mse, 95)  # Default threshold
+                            predictions['AutoEncoder'] = (mse > threshold).astype(int)
+                        except Exception as e:
+                            st.warning(f"AutoEncoder prediction failed: {e}")
+                    elif 'autoencoder' in models and not TENSORFLOW_AVAILABLE:
+                        st.warning("AutoEncoder model requires TensorFlow to make predictions.")
                     
                     # Add predictions to dataframe
                     result_df = sample_df.copy()
