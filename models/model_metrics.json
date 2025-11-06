@@ -1,0 +1,24 @@
+{
+  "isolation_forest": {
+    "Model": "Isolation Forest",
+    "Accuracy": 0.4980952380952381,
+    "Precision": 0.7959340237821251,
+    "Recall": 0.49664911440880805,
+    "F1-Score": 0.6116433308769345
+  },
+  "svm": {
+    "Model": "SVM",
+    "Accuracy": 0.48238095238095235,
+    "Precision": 0.7970307097823877,
+    "Recall": 0.4690043082814744,
+    "F1-Score": 0.590522112559331,
+    "ROC-AUC": 0.5047445016718703
+  },
+  "autoencoder": {
+    "Model": "AutoEncoder",
+    "Accuracy": 0.2235238095238095,
+    "Precision": 0.7221006564551422,
+    "Recall": 0.03949258018190522,
+    "F1-Score": 0.07488936797912175
+  }
+}

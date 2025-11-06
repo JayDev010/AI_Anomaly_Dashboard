@@ -1,0 +1,22 @@
+{
+  "best_accuracy": {
+    "model": "Isolation Forest",
+    "value": 0.4980952380952381
+  },
+  "best_precision": {
+    "model": "SVM",
+    "value": 0.7970307097823877
+  },
+  "best_recall": {
+    "model": "Isolation Forest",
+    "value": 0.49664911440880805
+  },
+  "best_f1_score": {
+    "model": "Isolation Forest",
+    "value": 0.6116433308769345
+  },
+  "best_roc_auc": {
+    "model": "SVM",
+    "value": 0.5047445016718703
+  }
+}
