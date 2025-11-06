@@ -1,22 +1,22 @@
 {
   "best_accuracy": {
-    "model": "Isolation Forest",
-    "value": 0.4980952380952381
+    "model": "SVM",
+    "value": 0.7286666666666667
   },
   "best_precision": {
     "model": "SVM",
-    "value": 0.7970307097823877
+    "value": 0.7969700320690036
   },
   "best_recall": {
-    "model": "Isolation Forest",
-    "value": 0.49664911440880805
+    "model": "SVM",
+    "value": 0.8767639902676398
   },
   "best_f1_score": {
-    "model": "Isolation Forest",
-    "value": 0.6116433308769345
+    "model": "SVM",
+    "value": 0.8349649539477495
   },
   "best_roc_auc": {
     "model": "SVM",
-    "value": 0.5047445016718703
+    "value": 0.5442432076236821
   }
 }
