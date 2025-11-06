@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="ZTA Anomaly Dashboard", layout="wide", initial_sidebar_state="expanded")
 
 @st.cache_data
-def load_data(path="zt_logs.csv"):
+def load_data(path="zt_logs_with_time_diff_and_anomaly.csv"):
     df = pd.read_csv(path)
     if "is_anomaly" not in df.columns:
         raise RuntimeError("Dataset must include 'is_anomaly' column")
