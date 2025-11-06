@@ -61,7 +61,7 @@ st.markdown("Models trained on normal data. Autoencoder threshold = **99th perce
 
 # Sidebar
 st.sidebar.header("Controls")
-data_path = st.sidebar.text_input("Path to features CSV", "zt_logs.csv")
+data_path = st.sidebar.text_input("Path to features CSV", "zt_logs_with_time_diff_and_anomaly.csv")
 simulate = st.sidebar.checkbox("Enable real-time simulation", value=False)
 chunk_size = st.sidebar.number_input("Real-time batch size (rows)", min_value=1, max_value=1000, value=50)
 interval = st.sidebar.number_input("Simulation interval (seconds)", min_value=0.5, max_value=30.0, value=3.0, step=0.5)
